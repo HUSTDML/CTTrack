@@ -4,8 +4,8 @@ from lib.train.data.util.processing_utils import sample_target
 # for debug
 import cv2
 import os
-from lib.models.cttrack.cttrack import build_vitpro
-from lib.test.utils.pre_processor import Preprocessor, Preprocessor_wo_mask
+from lib.models.cttrack.cttrack import build_cttrack
+from lib.test.utils.pre_processor import Preprocessor_wo_mask
 from lib.utils.box_ops import clip_box
 from copy import deepcopy
 from lib.utils.image import *
@@ -14,7 +14,7 @@ from lib.test.utils.vis_attn_maps import vis_attn_maps
 class CTTrack(BaseTracker):
 	def __init__(self, params, dataset_name):
 		super(CTTrack, self).__init__(params)
-		network = build_vitpro(params.cfg)
+		network = build_cttrack(params.cfg)
 		missing_keys, unexpected_keys = network.load_state_dict(torch.load(self.params.checkpoint, map_location='cpu')['net'], strict=False)
 		print("load checkpoint: ", self.params.checkpoint)
 		print("missing keys:", missing_keys)

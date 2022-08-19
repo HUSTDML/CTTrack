@@ -39,29 +39,55 @@ lib/train/admin/local.py  # paths about training
 lib/test/evaluation/local.py  # paths about testing
 ```
 
-## Train CT-Track
+## Train CTTrack-B
 ```
-python tracking/train.py --script cttrack --config mixattn --save_dir . --mode single
-python tracking/train.py --script cttrack_online --config mixattn --save_dir . --mode single --script_prv cttrak --config_prv mixattn  
+python tracking/train.py --script cttrack --config baseline --save_dir . --mode single
+python tracking/train.py --script cttrack_online --config baseline --save_dir . --mode single --script_prv cttrak --config_prv baseline  
 ```
-## Test CT-Track
+## Train CTTrack-L
+```
+python tracking/train.py --script cttrack --config baseline_L --save_dir . --mode single
+python tracking/train.py --script cttrack_online --config baseline_L --save_dir . --mode single --script_prv cttrak --config_prv baseline  
+```
+## Test CT-Track-B
 - OTB2015
 ```
-python tracking/test.py cttrack mixattn --dataset otb --threads 32
+python tracking/test.py cttrack baseline --dataset otb --threads 32
 ```
 - UAV123
 ```
-python tracking/test.py cttrack mixattn --dataset uav --threads 32
+python tracking/test.py cttrack baseline --dataset uav --threads 32
 ```
 - LaSOT
 ```
-python tracking/test.py cttrack mixattn --dataset lasot --threads 32
+python tracking/test.py cttrack baseline --dataset lasot --threads 32
 ```
 - GOT10K-test
 ```
-python tracking/test.py cttrack mixattn --dataset got10k_test --threads 32
+python tracking/test.py cttrack baseline --dataset got10k_test --threads 32
 ```
 - TrackingNet
 ```
-python tracking/test.py cttrack mixattn --dataset trackingnet --threads 32
+python tracking/test.py cttrack baseline --dataset trackingnet --threads 32
+```
+## Test CT-Track-L
+- OTB2015
+```
+python tracking/test.py cttrack baseline_L --dataset otb --threads 32
+```
+- UAV123
+```
+python tracking/test.py cttrack baseline_L --dataset uav --threads 32
+```
+- LaSOT
+```
+python tracking/test.py cttrack baseline_L --dataset lasot --threads 32
+```
+- GOT10K-test
+```
+python tracking/test.py cttrack baseline_L --dataset got10k_test --threads 32
+```
+- TrackingNet
+```
+python tracking/test.py cttrack baseline_L --dataset trackingnet --threads 32
 ```

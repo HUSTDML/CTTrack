@@ -1,7 +1,9 @@
 class EnvironmentSettings:
     def __init__(self):
-        workspace_root = '/home/uu201915762/workspace/CTTrack/'
-        data_root = '/home/uu201915762/workspace/MixFormer/data/'
+        # Set your local paths here.
+
+        workspace_root = ''
+        data_root = ''
 
         self.workspace_dir = workspace_root + 'output'  # Base directory for saving network checkpoints.
         self.tensorboard_dir = workspace_root + 'output/tensorboard'  # Directory for tensorboard files.

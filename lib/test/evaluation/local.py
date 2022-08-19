@@ -4,8 +4,8 @@ def local_env_settings():
     settings = EnvSettings()
 
     # Set your local paths here.
-    workspace_root = '/home/uu201915762/workspace/CTTrack/'
-    data_root = '/home/uu201915762/workspace/MixFormer/data/'
+    workspace_root = ''
+    data_root = ''
 
 
     settings.davis_dir = ''

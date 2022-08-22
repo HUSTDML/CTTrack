@@ -5,21 +5,20 @@ import importlib
 from torch.nn.functional import l1_loss
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.nn import BCEWithLogitsLoss
-from lib.train.actors.cttrack_actor import CTTrackActor
 
 from lib.train.trainers import LTRTrainer
 from lib.train.data.dataset_loader import build_seq_dataloaders
-from lib.train.utils.optim_factory import get_optimizer, get_optimizer_tt
+from lib.train.utils.optim_factory import get_optimizer_tt
 from lib.train.utils.schedule_factory import get_schedule
 from lib.train.utils.set_params import update_settings
 from lib.train.actors import *
 
-from lib.models.cttrack import build_cttrack
+from lib.models.cttrack import build_cttrack,build_cttract_train
 
 from lib.utils.box_ops import giou_loss
-from lib.utils.load_pretrain import remove_prefix, _get_prefix_dic, _add_prefix_dic
 
 def run(settings):
+
 	settings.description = 'Training script for transformer tracker'
 
 	# update the default configs with config file
@@ -48,18 +47,12 @@ def run(settings):
 	loader_train, loader_val = build_seq_dataloaders(cfg, settings)
 	# Create network
 
-	if settings.script_name == "cttrack" or settings.script_name == "cttrack_online":
+	if settings.script_name == "cttrack":
+		net = build_cttract_train(cfg)
+	elif settings.script_name == "cttrack_online":
 		net = build_cttrack(cfg)
 	else:
 		raise ValueError("illegal script name")
-
-	# -------------- load CTTrack --------------
-	model_path = "/home/uu201915762/workspace/CTTrack/VITPRO_online.pth.tar"
-	check_model = torch.load(model_path, map_location='cpu')['net']
-	missing_keys, unexpected_keys = net.load_state_dict(check_model, strict=False)
-	print("missing keys:", missing_keys)
-	print("unexpected keys:", unexpected_keys)
-	print("load model is done: " + model_path)
 
 	net.cuda()
 
@@ -71,11 +64,10 @@ def run(settings):
 		settings.device = torch.device("cuda:0")
 
 	# Loss functions and Actors
-	objective = {'giou': giou_loss, 'l1': l1_loss}
-	loss_weight = {'giou': cfg.TRAIN.GIOU_WEIGHT, 'l1': cfg.TRAIN.L1_WEIGHT}
-
 	if settings.script_name == "cttrack":
-		actor = CTTrackActor(net=net, objective=objective, loss_weight=loss_weight, settings=settings)
+		objective = {'giou': giou_loss, 'l1': l1_loss}
+		loss_weight = {'giou': cfg.TRAIN.GIOU_WEIGHT, 'l1': cfg.TRAIN.L1_WEIGHT, 'renew': cfg.TRAIN.RENEW_WEIGHT}
+		actor = CTtrackTrainActor(net=net, objective=objective, loss_weight=loss_weight, settings=settings)
 	elif  settings.script_name == "cttrack_online":
 		objective = {'score': BCEWithLogitsLoss()}
 		loss_weight = {'score': cfg.TRAIN.SCORE_WEIGHT}

@@ -5,7 +5,7 @@ from lib.train.data.util.processing_utils import sample_target
 import cv2
 import os
 from lib.models.cttrack.cttrack import build_cttrack
-from lib.test.utils.pre_processor import Preprocessor, Preprocessor_wo_mask
+from lib.test.utils.pre_processor import Preprocessor_wo_mask
 from lib.utils.box_ops import clip_box
 from copy import deepcopy
 from lib.utils.image import *

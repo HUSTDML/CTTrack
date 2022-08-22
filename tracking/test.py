@@ -35,7 +35,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Run tracker on sequence or dataset.')
     parser.add_argument('--tracker_name', type=str, default='cttrack', help='Name of tracking method.')
-    parser.add_argument('--tracker_param', type=str, default='mixattn_L',help='Name of config file.')
+    parser.add_argument('--tracker_param', type=str, default='baseline_L',help='Name of config file.')
     parser.add_argument('--runid', type=int, default=0, help='The run id.')
     parser.add_argument('--dataset_name', type=str, default='lasot', help='Name of dataset (otb, nfs, got10k_test,uav, tpl, vot, tn, gott, gotv, lasot).')
     parser.add_argument('--sequence', type=str, default=None, help ='Sequence number or name.')

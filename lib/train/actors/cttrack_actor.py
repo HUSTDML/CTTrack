@@ -35,7 +35,7 @@ class CTTrackActor(BaseActor):
 				raise Exception("Please setting proper labels for score branch.")
 
 		# compute losses
-		loss, status = self.compute_losses(out_dict, gt_bboxes[0], labels = labels)
+		loss, status = self.compute_losses(out_dict, labels = labels)
 
 		return loss, status
 
@@ -45,47 +45,21 @@ class CTTrackActor(BaseActor):
 		# out_dict: (B, N, C), outputs_coord: (1, B, N, C), target_query: (1, B, N, C)
 		return out_dict
 
-	def compute_losses(self, pred_dict, gt_bbox, return_status=True, labels=None):
+	def compute_losses(self, pred_dict, return_status=True, labels=None):
 
-		if 'pred_scores' in pred_dict:
-			pred_scores = pred_dict['pred_scores'].view(-1)
+		pred_scores = pred_dict['pred_scores'].view(-1)
 
-			if torch.isnan(pred_scores).any():
-				raise ValueError("Network outputs is NAN! Stop Training")
+		if torch.isnan(pred_scores).any():
+			raise ValueError("Network outputs is NAN! Stop Training")
 
-			score_loss = self.objective['score'](pred_scores, labels)
-			loss = score_loss * self.loss_weight['score']
-		else:
-			# Get boxes
-			pred_boxes = pred_dict['pred_boxes']
-			if torch.isnan(pred_boxes).any():
-				raise ValueError("Network outputs is NAN! Stop Training")
-			num_queries = pred_boxes.size(1)
-			pred_boxes_vec = box_cxcywh_to_xyxy(pred_boxes).view(-1, 4)  # (B,N,4) --> (BN,4) (x1,y1,x2,y2)
-			gt_boxes_vec = box_xywh_to_xyxy(gt_bbox)[:, None, :].repeat((1, num_queries, 1)).view(-1, 4).clamp(min=0.0,
-			                                                                                                   max=1.0)  # (B,4) --> (B,1,4) --> (B,N,4)
-			# compute giou and iou
-			try:
-				giou_loss, iou = self.objective['giou'](pred_boxes_vec, gt_boxes_vec)  # (BN,4) (BN,4)
-			except:
-				giou_loss, iou = torch.tensor(0.0).cuda(), torch.tensor(0.0).cuda()
-			# compute l1 loss
-			l1_loss = self.objective['l1'](pred_boxes_vec, gt_boxes_vec)  # (BN,4) (BN,4)
-			# weighted sum
-			loss = self.loss_weight['giou'] * giou_loss + self.loss_weight['l1'] * l1_loss
+		score_loss = self.objective['score'](pred_scores, labels)
+		loss = score_loss * self.loss_weight['score']
 
 		if return_status:
 			# status for log
-			if 'pred_scores' in pred_dict:
-				status = {"Loss/total": loss.item(),
-				          "Loss/scores": score_loss.item()}
+			status = {"Loss/total": loss.item(),
+			          "Loss/scores": score_loss.item()}
 
-			else:
-				mean_iou = iou.detach().mean()
-				status = {"Loss/total": loss.item(),
-				          "Loss/giou": giou_loss.item(),
-				          "Loss/l1": l1_loss.item(),
-				          "IoU": mean_iou.item()}
 			return loss, status
 		else:
 			return loss

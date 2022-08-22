@@ -10,7 +10,6 @@ from lib.models.boxhead.corner import build_box_head
 from lib.models.component.mlp import MultiLayerMlp
 from lib.utils.image import *
 
-
 class CTTrack(nn.Module):
 	def __init__(self, backbone, box_head, score_head=None):
 		""" Initializes the model.

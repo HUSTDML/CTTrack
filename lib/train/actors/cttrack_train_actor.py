@@ -2,7 +2,7 @@ import torch
 from . import BaseActor
 from lib.utils.box_ops import box_cxcywh_to_xyxy, box_xywh_to_xyxy
 
-class CTtrackTrainActor(BaseActor):
+class CTTrackTrainActor(BaseActor):
 	def __init__(self, net, objective, loss_weight, settings):
 		super().__init__(net, objective)
 		self.loss_weight = loss_weight

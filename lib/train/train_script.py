@@ -67,7 +67,7 @@ def run(settings):
 	if settings.script_name == "cttrack":
 		objective = {'giou': giou_loss, 'l1': l1_loss}
 		loss_weight = {'giou': cfg.TRAIN.GIOU_WEIGHT, 'l1': cfg.TRAIN.L1_WEIGHT, 'renew': cfg.TRAIN.RENEW_WEIGHT}
-		actor = CTtrackTrainActor(net=net, objective=objective, loss_weight=loss_weight, settings=settings)
+		actor = CTTrackTrainActor(net=net, objective=objective, loss_weight=loss_weight, settings=settings)
 	elif  settings.script_name == "cttrack_online":
 		objective = {'score': BCEWithLogitsLoss()}
 		loss_weight = {'score': cfg.TRAIN.SCORE_WEIGHT}

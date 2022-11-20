@@ -11,7 +11,7 @@ bash install.sh
 ## Data Preparation
 Put the tracking datasets in ./data. It should look like:
    ```
-   ${ÅRETRACK_ROOT}
+   ${CT-TRACK_ROOT}
     -- data
         -- lasot
             |-- airplane
@@ -39,12 +39,12 @@ lib/train/admin/local.py  # paths about training
 lib/test/evaluation/local.py  # paths about testing
 ```
 
-## Train CTTrack-B
+## Train CT-Track-B
 ```
 python tracking/train.py --script cttrack --config baseline --save_dir . --mode single
 python tracking/train.py --script cttrack_online --config baseline --save_dir . --mode single --script_prv cttrak --config_prv baseline  
 ```
-## Train CTTrack-L
+## Train CT-Track-L
 ```
 python tracking/train.py --script cttrack --config baseline_L --save_dir . --mode single
 python tracking/train.py --script cttrack_online --config baseline_L --save_dir . --mode single --script_prv cttrak --config_prv baseline  

@@ -3,7 +3,7 @@ The official implementation of the AAAI 2023 paper **<u>Compact Transformer Trac
 
 [[Models and Raw results]](https://drive.google.com/drive/folders/1xmlOzwIu_2Jexzzl69MCPFXBip1MgSbf?usp=sharing) (Google Driver)  [[Models and Raw results]](https://pan.baidu.com/s/1TCdIHfwxnlLDed98fzbyFg) (Baidu Driver: RLBW)
 
-![image-20221130223308081](README.assets/image-20221130223308081.png)
+![backbone](tracking/backbone.png)
 
 ## News
 
@@ -171,7 +171,7 @@ vot analysis --workspace . CTTrackPython --nocache
 
 ## Visualize attention maps
 
-![image-20221130234810656](README.assets/image-20221130234810656.png)
+![attention](tracking/attention.png)
 
 ## Model Zoo and raw results
 

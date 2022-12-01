@@ -54,7 +54,7 @@ bash install.sh
 ## Data Preparation
 Put the tracking datasets in ./data. It should look like:
    ```
-   ${CT-TRACK_ROOT}
+   ${CTTRACK_ROOT}
     -- data
         -- lasot
             |-- airplane
@@ -149,13 +149,13 @@ python tracking/test.py cttrack baseline_L --dataset trackingnet --threads 32
 **LaSOT/GOT10k-test/TrackingNet/OTB100/UAV123**
 
 ```
-python tracking/analysis_results.py {tracker_name} {config} --dataset {dataset_name}
+python tracking/analysis_results.py {script}  {config}  {dataset_name}
 ```
 
 **For example**
 
 ```
-python tracking/analysis_results.py cttrack baseline_L --dataset trackingnet
+python tracking/analysis_results.py cttrack baseline trackingnet
 ```
 
 **VOT2020**

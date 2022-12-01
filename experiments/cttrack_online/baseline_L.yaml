@@ -98,6 +98,7 @@ TEST:
     TRACKINGNET: [25]
     VOT20: [10]
     VOT20LT: [200]
+    UAV: [45]
   ONLINE_SIZES:
     LASOT: 2
     UAV: 1

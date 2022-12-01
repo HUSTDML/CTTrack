@@ -137,3 +137,6 @@ dmypy.json
 
 output/
 vis_attn_weights/
+tensorboard/
+logs/
+test/

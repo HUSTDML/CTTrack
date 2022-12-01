@@ -27,8 +27,8 @@ def parameters(group_name:str, name: str, script_name: str):
 	# params.checkpoint = os.path.join(save_dir, "checkpoints", "train", name, script_name,
 	#                                  '{}_ep{:04d}.pth.tar'.format(net_name, epochid))
 
-	# params.checkpoint = os.path.join(save_dir, "checkpoints/train/maevit/vitpro_mix/MAECORNER_ep0080.pth.tar")
-	params.checkpoint = '/home/uu201915762/workspace/CTTrack/VITPRO-L.pth.tar'
+	params.checkpoint = os.path.join(save_dir, "checkpoints/train/cctrack/baseline/CTTrack-B.pth.tar")
+	# params.checkpoint = '/home/luorun/CTTrack/VITPRO-L.pth.tar'
 
 	# whether to save boxes from all queries
 	params.save_all_boxes = False

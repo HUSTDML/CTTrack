@@ -17,7 +17,7 @@ from lib.test.vot20.vot20_utils import *
 
 
 class cctrack_vot20(object):
-    def __init__(self, tracker_name='cttrack', para_name='mixattn'):
+    def __init__(self, tracker_name='cttrack_online', para_name='baseline_L'):
         # create tracker
         tracker_info = Tracker(tracker_name, para_name, "vot20", None)
         params = tracker_info.get_parameters()
@@ -43,7 +43,8 @@ class cctrack_vot20(object):
 def run_vot_exp(tracker_name, para_name, vis=False):
 
     torch.set_num_threads(1)
-    save_root = os.path.join('/data/vot20/results', para_name)
+    prj_path = os.path.join(os.path.dirname(__file__), '..','..')
+    save_root = os.path.join(prj_path,'/external/vot20/cttrack/vis_results', para_name)
     if vis and (not os.path.exists(save_root)):
         os.mkdir(save_root)
     tracker = cctrack_vot20(tracker_name=tracker_name, para_name=para_name)

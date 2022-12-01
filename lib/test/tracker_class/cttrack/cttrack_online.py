@@ -4,11 +4,12 @@ from lib.train.data.util.processing_utils import sample_target
 # for debug
 import cv2
 import os
-from lib.models.cttrack.cttrack import build_cttrack
+from lib.models.cttrack import build_cttrack
 from lib.test.utils.pre_processor import Preprocessor, Preprocessor_wo_mask
 from lib.utils.box_ops import clip_box
 from copy import deepcopy
 from lib.utils.image import *
+from lib.utils.thop_test import cal_model_size
 
 class CTTrackOnline(BaseTracker):
 	def __init__(self, params, dataset_name):
@@ -33,6 +34,7 @@ class CTTrackOnline(BaseTracker):
 				os.makedirs(self.save_dir)
 		# for save boxes from all queries
 		self.save_all_boxes = params.save_all_boxes
+		# self.z_dict1 = {}
 
 		# Set the update interval
 		DATASET_NAME = dataset_name.upper()
@@ -60,6 +62,10 @@ class CTTrackOnline(BaseTracker):
 		self.online_template_amask = []
 		self.online_template.append(deepcopy(template))
 		self.online_template_amask.append(deepcopy(template_amask))
+		# print("template shape: {}".format(template.shape))
+		# with torch.no_grad():
+		#     self.z_dict1 = self.network.forward_backbone(template)
+		# save states
 		self.max_pred_score = -1.0
 		self.max_online_template = deepcopy(template)
 		self.max_online_template_amask = deepcopy(template_amask)
@@ -73,14 +79,19 @@ class CTTrackOnline(BaseTracker):
 			return {"all_boxes": all_boxes_save}
 
 	def track(self, image, info: dict = None):
+		# cal_model_size(self.network)
 		H, W, _ = image.shape
 		self.frame_id += 1
+		# print("frame id: {}".format(self.frame_id))
 		x_patch_arr, resize_factor, x_amask_arr = sample_target(image, self.state, self.params.search_factor,
 																output_sz=self.params.search_size)  # (x1, y1, w, h)
 		search, search_amask = self.preprocessor.process(x_patch_arr, x_amask_arr)
+
+		# print("search shape: {}".format(search.shape))
 		with torch.no_grad():
 			# # run the transformer
-			out_dict, _ = self.network.forward_test(template=self.template, online_template=self.online_template, search=search, run_score_head = True)
+			out_dict, _ = self.network.forward(template=self.template, online_template=self.online_template[-1], search=search, run_score_head = True)
+		# print("out_dict: {}".format(out_dict))
 
 		pred_boxes = out_dict['pred_boxes'].view(-1, 4)
 		pred_score = out_dict['pred_scores'].view(1).sigmoid().item()
@@ -88,6 +99,20 @@ class CTTrackOnline(BaseTracker):
 		pred_box = (pred_boxes.mean(dim=0) * self.params.search_size / resize_factor).tolist()  # (cx, cy, w, h) [0,1]
 		# get the final box result
 		self.state = clip_box(self.map_box_back(pred_box, resize_factor), H, W, margin=10)
+
+		# update template
+		# if pred_score > 0.9 and pred_score > self.max_pred_score:
+		# 	online_patch_arr, _, online_amask_arr = sample_target(image, self.state, self.params.template_factor,
+		# 	                                                      output_sz=self.params.template_size)
+		# 	online_template, online_template_amask = self.preprocessor.process(online_patch_arr, online_amask_arr)
+		# 	self.max_online_template = online_template
+		# 	self.max_online_template_amask = online_template_amask
+		#
+		# for idx, update_i in enumerate(self.update_intervals):
+		# 	if self.frame_id % update_i == 0:
+		# 		self.online_template = self.max_online_template
+		# 		self.online_template_amask = self.max_online_template_amask
+		# 		self.max_pred_score = -1.0
 
 		for idx, update_i in enumerate(self.update_intervals):
 			if self.frame_id % update_i == 0 and pred_score > 0.9:

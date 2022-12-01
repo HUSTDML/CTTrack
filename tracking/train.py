@@ -1,5 +1,11 @@
 import os
 import argparse
+import sys
+
+prj_path = os.path.join(os.path.dirname(__file__), '..')
+if prj_path not in sys.path:
+    sys.path.append(prj_path)
+
 
 def parse_args():
     """

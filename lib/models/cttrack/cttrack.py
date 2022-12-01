@@ -25,12 +25,12 @@ class CTTrack(nn.Module):
 		# Forward the corner head
 		return self.forward_head(search, cls_tokens, run_score_head)
 
-	def forward_test(self, template, online_template, search, run_score_head=False):
-		# template and serach: (b, c, h, w)
-		# online_template n*(b, c, h, w)
-		template, online_template, search, cls_tokens = self.backbone.forward_test(template, online_template, search)
-		# Forward the corner head
-		return self.forward_head(search, cls_tokens, run_score_head)
+	# def forward_test(self, template, online_template, search, run_score_head=False):
+	# 	# template and serach: (b, c, h, w)
+	# 	# online_template n*(b, c, h, w)
+	# 	template, online_template, search, cls_tokens = self.backbone.forward_test(template, online_template, search)
+	# 	# Forward the corner head
+	# 	return self.forward_head(search, cls_tokens, run_score_head)
 
 	def powerful(self, search, cls_tokens):
 		# search (B, C, H, W)
@@ -51,7 +51,8 @@ class CTTrack(nn.Module):
 		:return:
 		"""
 		out_dict = {}
-		opt_feat = self.powerful(search,cls_tokens)
+		# opt_feat = self.powerful(search,cls_tokens)
+		opt_feat=search
 		out_dict_box, outputs_coord = self.forward_box_head(opt_feat)
 		out_dict.update(out_dict_box)
 		if run_score_head and self.score_head is not None:

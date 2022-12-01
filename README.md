@@ -29,19 +29,19 @@ pass
 | **CTTrack**           | **93.3**   | 79.7       | **84.9**          | **72.8**     |
 | MixFormer* (CVPR2022) | 91.0       | 79.9       | 83.9              | 70.7         |
 | CSWinTT* (CVPR2022)   | 90.3       | 75.2       | 81.9              | 69.4         |
-| UTT                   | -          | -          | 79.7              | 67.2         |
-| STARK (ICVV2021)      | -          | 77.0       | 82.0              | 68.8         |
-| TransT (CVPR2021)     | 87.6       | 73.8       | 81.4              | 67.1         |
-| TrDiMP (CVPR2021)     | 87.6       | 73.2       | 78.4              | 68.8         |
-| STMTrack (CVPR2021)   | -          | 69.3       | 80.3              | 64.2         |
-| AutoMatch (ICVV2021)  | 83.8       | 67.5       | 76.0              | 65.2         |
-| SiamGAT (CVPR2021)    | 84.3       | 63.3       | -                 | 62.7         |
-| KYS (ECCV2020)        | -          | 63.3       | 74.0              | 63.6         |
-| SiamAttn (CVPR2020)   | 84.5       | 64.8       | 75.2              | -            |
-| SiamFC++ (AAAI2020)   | 80.4       | 62.3       | 75.4              | 59.5         |
-| SiamRPN++ (CVPR2019)  | 84.0       | 56.9       | 73.3              | 51.7         |
-| DiMP (ICCV2019)       | 84.9       | 66.4       | 74.0              | 61.1         |
-| ATOM (CVPR2019)       | 82.7       | 57.6       | 70.3              | 55.6         |
+| UTT* (CVPR2022)       | -          | -          | 79.7              | 67.2         |
+| STARK* (ICVV2021)     | -          | 77.0       | 82.0              | 68.8         |
+| TransT* (CVPR2021)    | 87.6       | 73.8       | 81.4              | 67.1         |
+| TrDiMP* (CVPR2021)    | 87.6       | 73.2       | 78.4              | 68.8         |
+| STMTrack* (CVPR2021)  | -          | 69.3       | 80.3              | 64.2         |
+| AutoMatch* (ICVV2021) | 83.8       | 67.5       | 76.0              | 65.2         |
+| SiamGAT* (CVPR2021)   | 84.3       | 63.3       | -                 | 62.7         |
+| KYS* (ECCV2020)       | -          | 63.3       | 74.0              | 63.6         |
+| SiamAttn* (CVPR2020)  | 84.5       | 64.8       | 75.2              | -            |
+| SiamFC++* (AAAI2020)  | 80.4       | 62.3       | 75.4              | 59.5         |
+| SiamRPN++* (CVPR2019) | 84.0       | 56.9       | 73.3              | 51.7         |
+| DiMP* (ICCV2019)      | 84.9       | 66.4       | 74.0              | 61.1         |
+| ATOM* (CVPR2019)      | 82.7       | 57.6       | 70.3              | 55.6         |
 
 ## Install the environment
 
@@ -164,9 +164,9 @@ Before evaluating "CTTrack" on VOT2020, please install  VOT toolkit which is req
 
 ```
 cd external/vot20/<workspace_dir>
-vot evaluate --workspace . MixFormerPython
+vot evaluate --workspace . CTTrackPython
 # generating analysis results
-vot analysis --workspace . --nocache
+vot analysis --workspace . CTTrackPython --nocache
 ```
 
 ## Visualize attention maps

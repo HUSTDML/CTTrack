@@ -12,17 +12,7 @@ The official implementation of the AAAI 2023 paper **<u>Compact Transformer Trac
 - MixFormer is accepted to <font color='red'> **AAAI2023** </font>.
 - We release Code, models and raw results.
 
-## Highlights
-
-### :sparkles: New transformer tracking framework
-
-pass
-
-### :sparkles: End-to-end, Positional-embedding-free, multi-feature-aggregation-free
-
-pass
-
-### :sparkles: Strong performance
+## Strong performance
 
 | Tracker               | UAV123 (P) | LaSOT (NP) | TrackingNet (AUC) | GOT-10k (AO) |
 | --------------------- | ---------- | ---------- | ----------------- | ------------ |

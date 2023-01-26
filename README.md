@@ -179,27 +179,25 @@ vot analysis --workspace . CTTrackPython --nocache
 
 ## Contact
 
-Zikai Song: SkyeSong@hust.edu.cn 
+Zikai Song: skyesong@hust.edu.cn 
 
 Run Luo: lr_8823@hust.edu.cn
 
 ## Acknowledgments
 
-* Thanks for [PyTracking](https://github.com/visionml/pytracking) Library and [STARK](https://github.com/researchmm/Stark) Library, which helps us to quickly implement our ideas.
-* We use the implementation of the CvT from the official repo [CvT](https://github.com/leoxiaobin/CvT).  
+* Thanks for [PyTracking](https://github.com/visionml/pytracking) Library, [STARK](https://github.com/researchmm/Stark) Library and [MixFormer](https://github.com/MCG-NJU/MixFormer), which helps us to quickly implement our ideas.
 
 ## Citation
 
 If you think this project is helpful, please feel free to leave a star⭐️ and cite our paper:
 
 ```
-@InProceedings{Cui_2022_CVPR,
-   author    = {Cui, Yutao and Jiang, Cheng and Wang, Limin and Wu, Gangshan},
-   title     = {MixFormer: End-to-End Tracking With Iterative Mixed Attention},
-   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-   month     = {June},
-   year      = {2022},
-   pages     = {13608-13618}
+@InProceedings{Song_2023_AAAI,
+   author    = {Song, Zikai and Luo, Run and Yu, Junqing and Chen, Yi-Ping Phoebe and Yang, Wei},
+   title     = {Compact Transformer Tracker with Correlative Masked Modeling},
+   booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)},
+   month     = {February},
+   year      = {2023}
 }
 ```
 

@@ -185,7 +185,7 @@ Run Luo: lr_8823@hust.edu.cn
 
 ## Acknowledgments
 
-* Thanks for [PyTracking](https://github.com/visionml/pytracking) Library, [STARK](https://github.com/researchmm/Stark) Library and [MixFormer](https://github.com/MCG-NJU/MixFormer), which helps us to quickly implement our ideas.
+* Thanks for [PyTracking](https://github.com/visionml/pytracking) Library, [STARK](https://github.com/researchmm/Stark) Library and [MixFormer](https://github.com/MCG-NJU/MixFormer) Library, which helps us to quickly implement our ideas.
 
 ## Citation
 

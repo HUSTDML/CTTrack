@@ -6,11 +6,17 @@ The official implementation of the AAAI 2023 paper **<u>Compact Transformer Trac
 ![backbone](tracking/backbone.png)
 
 ## News
+**[ Jan 18, 2023]**
 
-**[ Nov 18, 2023]**
-
-- MixFormer is accepted to <font color='red'> **AAAI2023** </font>.
 - We release Code, models and raw results.
+
+**[ Jan 11, 2023]**
+
+- Our paper is selected for an <font color='red'> **oral** </font> presentation.
+
+**[ Nov 19, 2022]**
+
+- CTTrack is accepted to <font color='red'> **AAAI2023** </font>.
 
 ## Strong performance
 

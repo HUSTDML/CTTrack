@@ -53,7 +53,7 @@ tensorboardX==2.5.1
 thop==0.1.1.post2209072238
 tikzplotlib==0.10.1
 timm==0.6.7
-torch==1.7.1
+torch==1.13.1
 torchaudio==0.7.0a0+a853dff
 torchvision==0.8.0a0
 tqdm==4.64.0

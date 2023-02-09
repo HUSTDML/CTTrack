@@ -44,7 +44,7 @@ The official implementation of the AAAI 2023 paper **<u> [[Compact Transformer T
 ```
 conda create -n cttrack python=3.7
 conda activate cttrack
-bash install.sh
+pip install -r requirements.txt
 ```
 
 ## Data Preparation

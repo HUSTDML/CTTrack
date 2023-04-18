@@ -1,7 +1,6 @@
 # **CTTrack**
 The official implementation of the AAAI 2023 paper **<u> [[Compact Transformer Tracker with Correlative Masked Modeling]](https://arxiv.org/abs/2301.10938) </u>**
 
-
 [[Models and Raw results]](https://drive.google.com/drive/folders/1xmlOzwIu_2Jexzzl69MCPFXBip1MgSbf?usp=sharing) (Google Driver)  [[Models and Raw results]](https://pan.baidu.com/s/1NGX2BlkkfZlGSciTI7XNpg) (Baidu Driver: LRBW)
 
 ![backbone](tracking/backbone.png)
